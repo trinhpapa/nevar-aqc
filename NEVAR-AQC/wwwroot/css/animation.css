@@ -1,0 +1,29 @@
+﻿@keyframes left-control-active {
+    0% {
+        width: 55px;
+    }
+
+    100% {
+        width: 225px;
+    }
+}
+
+@keyframes left-control {
+    0% {
+        width: 225px;
+    }
+
+    100% {
+        width: 55px;
+    }
+}
+
+@keyframes tooltip-show {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}

@@ -1,0 +1,73 @@
+﻿@{
+    Layout = null;
+}
+@if (Model != null)
+{
+    <div class="table-wrapper">
+        <table id="tableData" class="table table-hover table-light">
+            <thead class="bg-primary text-light">
+                <tr>
+                    <th>Chức năng</th>
+                    <th>Số phiếu</th>
+                    <th>Loại phiếu</th>
+                    <th>Khách hàng</th>
+                    <th>Đại diện</th>
+                    <th>Ngày thêm</th>
+                    <th>Người thêm</th>
+                    <th>Ngày hẹn</th>
+                    <th>Trạng thái</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Results.Count != 0)
+                {
+
+                    @foreach (var item in Model.Results)
+                    {
+                        <tr data-id="@item.Id">
+                            <td class="table-control control-left">
+                                <a tr-tooltip="In phiếu yêu cầu" data-invoice="@item.InvoiceNo" data-edition="@item.Edition" data-target="#modal-print-invoice" data-toggle="modal"><i class="fas fa-print text-primary"></i></a>
+                                @if (item.CTGRequirementTypeEntity.Alias == "YCTN")
+                                {
+                                    <a data-id="@item.Id" tr-tooltip="Chỉnh sửa nội dung" data-target="#modal-test-update" data-toggle="modal"><i class="fa fa-edit text-primary"></i></a>
+                                }
+                                @if (item.ProcessStatusId == 5)
+                                {
+                                    <a data-target="#modal-print-result-@item.Id" data-toggle="modal" tr-tooltip="In phiếu kết quả"><i class="fa fa-clipboard text-success"></i></a>
+                                    <div class="modal fade child-modal" id="modal-print-result-@item.Id">
+                                        <div class="transition-smooth modal-dialog modal-dialog-centered modal-sm">
+                                            <div class="modal-content">
+                                                <div class="modal-body pl-4 pr-4">
+                                                    @foreach (var specimen in item.IDTestRequirementEntities)
+                                                    {
+                                                        <a target="_blank" class="btn btn-outline-primary btn-lg btn-block" href="/receptiondepartment/testresultreport?id=@specimen.Id">@specimen.SpecimenCode</a>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </td>
+                            <td>@item.InvoiceNo</td>
+                            <td>@item.CTGRequirementTypeEntity.Vietnamese</td>
+                            <td>@item.SYSCustomerEntity.Name</td>
+                            <td>@item.Representative</td>
+                            <td>@item.CreatedTime.ToString("dd/MM/yyyy HH:mm")</td>
+                            <td>@item.CRESYSUserEntity.DisplayName</td>
+                            <td>@(item.ResultDay == null ? "NaN" : @item.ResultDay.ToString("dd/MM/yyyy"))</td>
+                            <td><span class="badge" style="color: #fff; background-color: #@item.CTGRequirementStatusEntity.HtmlColour">@item.CTGRequirementStatusEntity.ProcessStatus</span></td>
+                        </tr>
+                    }
+
+                }
+                else
+                {
+                    <tr class="bg-white">
+                        <td colspan="8" class="text-center p-2 text-secondary" style="font-size: 16px"><i class="fa fa-exclamation-triangle"></i><br />Không có dữ liệu</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <ul id="pagination-tag" data-pages="@Model.PageCount" data-rows="@Model.RowCount" data-index="@Model.CurrentPage" class="pagination justify-content-center"></ul>
+}

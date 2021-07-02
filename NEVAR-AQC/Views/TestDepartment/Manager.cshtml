@@ -1,0 +1,127 @@
+﻿@{
+    ViewData["Title"] = "Bộ phận thử nghiệm";
+    ViewData["Sitemap"] = "Phòng quản lý - Bộ phận thử nghiệm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/lib/gijgo/css/gijgo.min.css" />
+    <link rel="stylesheet" href="~/lib/jquery-ui/jquery-ui.min.css" />
+    <link rel="stylesheet" href="~/lib/jquery-ui/jquery-ui.theme.min.css" />
+    <link rel="stylesheet" href="~/lib/tagify/tagify.css" />
+    <link rel="stylesheet" href="~/lib/select2/theme/select2-bootstrap-sm.css" />
+}
+@section Scripts {
+    <script src="~/lib/linqjs/linq.min.js"></script>
+    <script src="~/lib/gijgo/js/gijgo.min.js"></script>
+    <script src="~/lib/jquery-ui/jquery-ui.min.js"></script>
+    <script src="~/lib/tagify/jQuery.tagify.min.js"></script>
+    <script src="~/lib/select2/dist/select2.min.js"></script>
+    <environment exclude="Development">
+        <script src="~/js/test-department/manager.min.js" asp-append-version="true"></script>
+        <script src="~/js/test-department/managerhandle.min.js" asp-append-version="true"></script>
+    </environment>
+    <environment include="Development">
+        <script src="~/js/test-department/manager.js" asp-append-version="true"></script>
+        <script src="~/js/test-department/managerhandle.js" asp-append-version="true"></script>
+    </environment>
+    <script>
+        $('#datePicker').datepicker({
+            minDate: todayFull,
+            value: todayDateVN,
+            uiLibrary: 'bootstrap4',
+            format: 'dd/mm/yyyy',
+        });
+    </script>
+}
+<div class="main-control bg-white ">
+    <div class="button-function form-inline">
+        @*<button class="btn btn-sm btn-primary" id="filter-table"><i class="fa fa-filter"></i> Lọc hiển thị</button>*@
+        <span>Tìm kiếm: </span>
+        <form id="search-filter-form">
+            <div class="input-group input-group-sm ml-2" style="        width: 300px">
+                <input type="text" id="search-filter" name="searchFilter" class="form-control" placeholder="Tìm số phiếu">
+                <div class="input-group-append">
+                    <button type="submit" tr-tooltip="Tìm kiếm" class="btn btn-primary"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="filter-content border-top form-inline">
+        <div class="form-inline mr-2">
+            <span>Loại phiếu:&nbsp;</span>
+            <select id="requirement-filter" class="form-control form-control-sm"></select>
+        </div>
+        <div class="form-inline mr-2">
+            <span>Ngày thêm:&nbsp;</span>
+            <input id="created-time-filter" name="ResultDay" class="form-control form-control-sm" required />
+        </div>
+        <div class="form-inline mr-2">
+            <span>Ngày hẹn:&nbsp;</span>
+            <input id="result-day-filter" name="ResultDay" class="form-control form-control-sm" required />
+        </div>
+        <div class="form-inline mr-2">
+            <span>Trạng thái:&nbsp;</span>
+            <select id="status-filter" class="form-control form-control-sm">
+                <option value="0">Tất cả</option>
+                <option value="1">Đã tiếp nhận</option>
+                <option value="2">Đã gửi xử lý</option>
+                <option value="3">Đã lên kế hoạch</option>
+                <option value="4">Đã có kết quả</option>
+                <option value="5">Đã trả kết quả</option>
+            </select>
+        </div>
+        <div class="form-inline mr-2">
+            <button class="btn btn-sm btn-success ml-2" id="filter-table-action"><i class="fa fa-filter"></i> Lọc</button>
+            <button class="btn btn-sm btn-danger ml-2" id="filter-table-cancel"><i class="fa fa-times"></i> Hủy</button>
+        </div>
+    </div>
+</div>
+<div class="main-content">
+    <div id="table-content"></div>
+</div>
+<div class="modal fade" id="modalPlanManager" data-backdrop="static" data-keyboard="false">
+    <div class="transition-smooth modal-dialog modal-dialog-centered modal-super">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white text-center font-weight-bold pt-2 pb-2" style="display: block">
+                <span>Mã phiếu: </span><span id="invoice-no"></span><span> - Kế hoạch thử nghiệm</span>
+                <a class="text-white float-right mouse-pointer toggle-screen-modal"><i class="far fa-expand-arrows"></i></a>
+            </div>
+            <div class="modal-body">
+                <div id="plan-loading" class="text-secondary text-center"><i class="fas fa-circle-notch fa-spin fa-2x fa-fw"></i></div>
+            </div>
+            <div class="modal-footer p-2">
+                <button class="btn btn-sm btn-danger" id="hide-form" data-dismiss="modal"><i class="fa fa-times"></i> Đóng</button>
+                <button onclick="TestDepartment.ajaxRequest.updatePlanAsync(this)" class="btn btn-sm btn-primary" id="submit-form"><i class="fa fa-plus"></i> Cập nhật</button>
+                <button  class="btn btn-sm btn-success" id="print-form"><i class="fa fa-print"></i> In</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade child-modal" id="modal-option-manager">
+    <div class="transition-smooth modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content">
+            <div class="modal-body pl-4 pr-4">
+                <button id="btnViewPlan" data-target="#modalPlanManager" data-toggle="modal" data-dismiss="modal" class="btn btn-outline-primary btn-lg btn-block">Xem kế hoạch</button>
+                <button id="btnPrintPlan" onclick="PrintPlan(this)" data-dismiss="modal" class="btn btn-outline-primary btn-lg btn-block">In kế hoạch</button>
+                <button id="btnSummarizeTheResults" data-target="#modal-summary-of-results" data-toggle="modal" data-dismiss="modal" class="btn btn-outline-primary btn-lg btn-block">Tổng hợp kết quả</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal-summary-of-results" data-backdrop="static" data-keyboard="false">
+    <div class="transition-smooth modal-dialog modal-dialog-centered modal-super">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white font-weight-bold pt-2 pb-2" style="display: block">
+                <span>Tổng hợp kết quả</span>
+                <a class="text-white float-right mouse-pointer toggle-screen-modal"><i class="far fa-expand-arrows"></i></a>
+            </div>
+            <div class="modal-body">
+                <div id="plan-loading" class="text-secondary text-center"><i class="fas fa-circle-notch fa-spin fa-2x fa-fw"></i></div>
+            </div>
+            <div class="modal-footer p-2">
+                <button class="btn btn-sm btn-danger" id="hide-form" data-dismiss="modal"><i class="fa fa-times"></i> Đóng</button>
+                <button onclick="TestDepartment.ajaxRequest.submitSummaryOfResult(this)" class="btn btn-sm btn-success" id="submit-summary-form"><i class="fa fa-check"></i> Xác nhận kết quả</button>
+            </div>
+        </div>
+    </div>
+</div>

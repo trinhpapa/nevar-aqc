@@ -1,0 +1,153 @@
+﻿@{
+    ViewData["Title"] = "Bộ phận tiếp nhận yêu cầu";
+    ViewData["Sitemap"] = "Bộ phận tiếp nhận yêu cầu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/lib/gijgo/css/gijgo.min.css" />
+    <link rel="stylesheet" href="~/lib/jquery-ui/jquery-ui.min.css" />
+    <link rel="stylesheet" href="~/lib/jquery-ui/jquery-ui.theme.min.css" />
+}
+@section Scripts {
+    <script src="~/lib/linqjs/linq.min.js"></script>
+    <script src="~/lib/gijgo/js/gijgo.min.js"></script>
+    <script src="~/lib/jquery-ui/jquery-ui.min.js"></script>
+    <environment include="Development">
+        <script src="~/js/reception-department/receptiondepartment.js" asp-append-version="true"></script>
+        <script src="~/js/reception-department/receptiondepartmenthandle.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/reception-department/receptiondepartment.min.js" asp-append-version="true"></script>
+        <script src="~/js/reception-department/receptiondepartmenthandle.min.js" asp-append-version="true"></script>
+    </environment>
+
+}
+<div class="main-control">
+    <div class="button-function bg-white form-inline">
+        <button class="btn btn-sm btn-primary mr-2" data-toggle="modal" data-target="#modal-requirement-form"><i class="fa fa-plus"></i> Thêm phiếu</button>
+        <form id="search-filter-form">
+            <div class="input-group input-group-sm mr-2" style="        width: 350px">
+                <input type="text" id="search-content" class="form-control" placeholder="Số phiếu, khách hàng, người đại diện">
+                <div class="input-group-append">
+                    <a tl-tooltip="Lọc hiển thị" class="btn btn-sm btn-outline-primary text-primary" id="filter-table"><i class="fa fa-filter"></i></a>
+                    <button tr-tooltip="Tìm kiếm" type="submit" class="btn btn-primary pr-3 pl-3"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+        </form>
+        <button id="summary-of-invoice" class="btn btn-sm btn-success ml-auto" style="display: none"><i class="fa fa-file-excel"></i> Tổng hợp phiếu</button>
+    </div>
+    <div class="filter-content border-top bg-white">
+        <div class="mr-2">
+            <span>Loại phiếu:&nbsp;</span>
+            <select id="requirement-filter" class="form-control form-control-sm"></select>
+        </div>
+        <div class="mr-2">
+            <span>Ngày thêm:&nbsp;</span>
+            <input id="created-time-filter" name="ResultDay" class="form-control form-control-sm" />
+        </div>
+        <div class="mr-2">
+            <span>Ngày hẹn:&nbsp;</span>
+            <input id="result-day-filter" name="ResultDay" class="form-control form-control-sm" />
+        </div>
+        <div class="mr-2">
+            <span>Trạng thái:&nbsp;</span>
+            <select id="status-filter" class="form-control form-control-sm">
+                <option value="0">Tất cả</option>
+                <option value="1">Đã tiếp nhận</option>
+                <option value="2">Đã gửi xử lý</option>
+                <option value="3">Đã lên kế hoạch</option>
+                <option value="4">Đã có kết quả</option>
+                <option value="5">Đã trả kết quả</option>
+            </select>
+        </div>
+        <div class="mr-2">
+            <span>&nbsp;</span>
+            <div class="form-inline">
+                <button class="btn btn-sm btn-primary ml-2" id="filter-table-action"><i class="fa fa-search"></i> Tìm kiếm</button>
+                <button class="btn btn-sm btn-danger ml-2" id="filter-table-cancel"><i class="fa fa-times"></i> Hủy</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="main-content">
+    <div id="content-data"></div>
+</div>
+<div class="modal fade" id="modal-requirement-form" data-backdrop="static" data-keyboard="false">
+    <div class="transition-smooth modal-dialog modal-dialog-centered modal-super">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white text-center font-weight-bold pt-2 pb-2">
+                Phiếu yêu cầu
+                <a class="text-white float-right mouse-pointer toggle-screen-modal"><i class="far fa-expand-arrows"></i></a>
+            </div>
+            <div class="modal-body">
+                <div class="form-row mb-2">
+                    <div class="col-sm-2">
+                        <label>Loại phiếu:</label>
+                    </div>
+                    <div class="col-sm-5">
+                        <select id="requirement-type" name="RequirementTypeId" class="form-control form-control-sm"></select>
+                    </div>
+                    <div class="col-sm-2 text-right">
+                        <label>Số phiếu:</label>
+                    </div>
+                    <div class="col-sm-3">
+                        <input id="invoice-no" type="text" class="form-control form-control-sm" value="" readonly />
+                    </div>
+                </div>
+                <partial name="PartialView/TestRequirementFormPartial" />
+                <partial name="PartialView/CalibrationRequirementFormPartial" />
+            </div>
+            <div class="modal-footer p-2">
+                <button class="btn btn-sm btn-secondary" id="reset-form"><i class="fa fa-sync-alt"></i> Reset form</button>
+                <button class="btn btn-sm btn-danger" id="hide-form" data-dismiss="modal"><i class="fa fa-times"></i> Đóng</button>
+                <button class="btn btn-sm btn-primary" id="submit-form"><i class="fa fa-check"></i> Thêm</button>
+                <button class="btn btn-sm btn-success" id="print-form"><i class="fa fa-print"></i> In phiếu</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade child-modal" id="modal-test-update" data-backdrop="static" data-keyboard="false">
+    <div class="transition-smooth modal-dialog modal-dialog-centered modal-super">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white text-center font-weight-bold pt-2 pb-2">
+                Yêu cầu chỉnh sửa thông tin
+                <a class="text-white float-right mouse-pointer toggle-screen-modal"><i class="fa fa-expand-arrows-alt" aria-hidden="true"></i></a>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer p-2">
+                <button class="btn btn-sm btn-danger" id="cancel-test-update" data-dismiss="modal"><i class="fa fa-times"></i> Hủy</button>
+                <button class="btn btn-sm btn-primary" id="submit-test-update"><i class="fa fa-check"></i> Cập nhật</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade child-modal" id="modal-test-property" data-backdrop="static" data-keyboard="false">
+    <div class="transition-smooth modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white text-center font-weight-bold pt-2 pb-2">
+                Chỉ tiêu thử nghiệm
+                <a class="text-white float-right mouse-pointer toggle-super-modal"><i class="fa fa-expand-arrows-alt" aria-hidden="true"></i></a>
+            </div>
+            <div class="modal-body">
+                <table id="table-test-property" class="table table-borderless table-hover">
+                    <tbody></tbody>
+                </table>
+            </div>
+            <div class="modal-footer p-2">
+                <button class="btn btn-sm btn-success" id="add-test-property"><i class="fa fa-plus"></i> Thêm chỉ tiêu</button>
+                <button class="btn btn-sm btn-primary" id="update-test-property" data-dismiss="modal"><i class="fa fa-check"></i> Cập nhật</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade child-modal" id="modal-print-invoice">
+    <div class="transition-smooth modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content">
+            <div class="modal-body pl-4 pr-4">
+            </div>
+        </div>
+    </div>
+</div>

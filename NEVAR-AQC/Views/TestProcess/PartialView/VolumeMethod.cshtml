@@ -1,0 +1,115 @@
+﻿@{
+    Layout = null;
+}
+<div class="form-row mb-2">
+    <div class="col-3">
+        <label class="align-middle font-weight-bold">Khối lượng/thể tích ban đầu:</label>
+    </div>
+    <div class="col-9">
+        <div class="d-inline-block">
+            <span>Lần 1 (L1): </span>
+            <input id="quantum-l1" type="text" class="input-for-form" style="width: 100px;" />
+            <span>g hoặc mL</span>
+        </div>
+        <div class="d-inline-block">
+            <span>; Lần 2 (L2): </span>
+            <input id="quantum-l2" type="text" class="input-for-form" style="width: 100px;" />
+            <span>g hoặc mL</span>
+        </div>
+    </div>
+</div>
+<div class="form-row mb-2">
+    <div class="col-3">
+        <label class="align-middle font-weight-bold">Nồng độ dung dịch chuẩn:</label>
+    </div>
+    <div class="col-9">
+        <div class="d-inline-block">
+            <input id="solution-name-1" type="text" class="input-for-form" />
+        </div>
+        <div class="d-inline-block">
+            <span> - </span>
+            <input id="concentration-of-solution-1" type="text" class="input-for-form" />
+        </div>
+    </div>
+</div>
+<div class="form-row mb-2">
+    <div class="col-3">
+        <label class="align-middle font-weight-bold">Nồng độ dung dịch chuẩn:</label>
+    </div>
+    <div class="col-9">
+        <div class="d-inline-block">
+            <input id="solution-name-2" type="text" class="input-for-form" />
+        </div>
+        <div class="d-inline-block">
+            <span> - </span>
+            <input id="concentration-of-solution-2" type="text" class="input-for-form" />
+        </div>
+    </div>
+</div>
+<div class="form-row mb-2">
+    <div class="col-12">
+        <label class="align-middle font-weight-bold">Các số liệu quan trắc khác:</label>
+        <textarea id="other-monitoring-data" class="form-control form-control-sm"></textarea>
+    </div>
+</div>
+<div class="form-row mb-2">
+    <div class="col-3">
+        <label class="align-middle font-weight-bold">Nồng độ thêm chuẩn (nếu có):</label>
+    </div>
+    <div class="col-9">
+        <div class="">
+            <span>Thêm chuẩn 1 (T<sub>1</sub>): </span><input id="t1" type="text" class="input-for-form" />
+        </div>
+        <div class="">
+            <span>Thêm chuẩn 2 (T<sub>2</sub>): </span><input id="t2" type="text" class="input-for-form" />
+        </div>
+    </div>
+</div>
+<div class="form-row mb-2">
+    <div class="col-12">
+        <label class="align-middle font-weight-bold">Công thức tính toán:</label>
+        <textarea id="calculation-formula" class="form-control form-control-sm"></textarea>
+    </div>
+</div>
+<div class="form-row mb-2">
+    <div class="col-12">
+        <label class="align-middle font-weight-bold">Kết quả tính toán:</label>
+        <table class="table table-sm table-bordered table-light text-center">
+            <thead>
+                <tr>
+                    <th>Tên mẫu (kí hiệu chén/cốc)</th>
+                    <th><span>L<sub>1</sub></span></th>
+                    <th><span>L<sub>2</sub></span></th>
+                    <th><span>T<sub>1</sub></span></th>
+                    <th><span>T<sub>2</sub></span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span>Kết quả</span></td>
+                    <td><input id="result-l1" type="text" class="input-for-form" /></td>
+                    <td><input id="result-l2" type="text" class="input-for-form" /></td>
+                    <td><input id="result-t1" type="text" class="input-for-form" /></td>
+                    <td><input id="result-t2" type="text" class="input-for-form" /></td>
+                </tr>
+                <tr>
+                    <td><span>Kết quả trung bình</span></td>
+                    <td colspan="2"><input id="average-results-l" type="text" class="input-for-form" /></td>
+                    <td colspan="2"><input id="average-results-t" type="text" class="input-for-form" /></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="form-row mb-2">
+    <div class="col-12">
+        <label class="align-middle font-weight-bold">Độ thu hồi (nếu có):</label>
+        <textarea id="percent-of-revoke" class="form-control form-control-sm"></textarea>
+    </div>
+</div>
+<div class="form-row mb-2">
+    <div class="col-12">
+        <label class="align-middle font-weight-bold">Kết quả báo cáo:</label>
+        <textarea id="report-results" class="form-control form-control-sm"></textarea>
+    </div>
+</div>

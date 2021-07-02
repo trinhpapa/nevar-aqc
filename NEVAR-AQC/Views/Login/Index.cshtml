@@ -1,0 +1,74 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đăng nhập - Hệ thống tiêu chuẩn đo lường chất lượng</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/toastr/toastr.min.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
+    <environment include="Development">
+        <link rel="stylesheet" href="~/css/site.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/css/site.min.css" />
+    </environment>
+    <style>
+        .card {
+            margin: auto;
+            margin-top: 50px;
+            box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        .form-group {
+            text-align: left;
+        }
+
+        .navbar {
+            box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+            display: block !important;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body style="background-color: #EEF2F6">
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-primary box-shadow mb-3 text-light text-center pb-3 pt-3">
+            <span style="        font-size: 20px;">Hệ thống tiêu chuẩn đo lường chất lượng</span>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3 text-center">
+            <div class="card text-center" style="        width: 25rem;">
+                <div class="card-body">
+                    <img src="~/images/logo_tdc1.png" width="150" height="150" />
+                    <form id="credentials-form">
+                        <div class="text-left mb-3">
+                            <label for="Username"><b>Tên đăng nhập</b></label>
+                            <input id="Username" name="Username" type="text" class="form-control" required />
+                            <label for="PasswordOrigin"><b>Mật khẩu</b></label>
+                            <input id="PasswordOrigin" name="PasswordOrigin" type="password" class="form-control" required />
+                            <button id="login-button" type="submit" class="btn btn-block btn-primary mt-4">ĐĂNG NHẬP</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <i>Nghe An Technical Center of Standards, Metrology and Quality &copy; 2019</i>
+        </main>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/toastr/toastr.min.js"></script>
+    <script src="~/lib/aspnet/signalr/dist/browser/signalr.min.js"></script>
+    <environment include="Development">
+        <script src="~/js/login.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/login.min.js" asp-append-version="true"></script>
+    </environment>
+</body>
+</html>

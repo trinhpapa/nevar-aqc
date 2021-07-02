@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <RootNamespace>NEVAR_AQC.Service</RootNamespace>
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NEVAR-AQC.Core\NEVAR-AQC.Core.csproj" />
+  </ItemGroup>
+
+</Project>

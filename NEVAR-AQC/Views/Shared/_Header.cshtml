@@ -1,0 +1,96 @@
+﻿@{
+    Layout = null;
+}
+
+<section class="header bg-primary box-shadow">
+    <div class="logo-area text-center">
+        <img id="app-logo" src="~/images/logo_tdc1.png" alt="Logo" />
+    </div>
+    <div class="control-area">
+        <div class="toggle-button">
+            <button r-tooltip="Toggle menu" id="control-expand" class="btn bg-white text-primary float-right"><i class="fa fa-outdent fa-fw"></i></button>
+        </div>
+        <div class="user-control">
+            <button b-tooltip="Thông báo" id="user-notification" style="font-size: 22px;" class="btn btn-link text-white align-middle font-weight-bold none-decoration"><i class="fa fa-bell"></i></button>
+            <button id="user-avatar" data-toggle="modal" data-target="#userModal" class="btn btn-link text-white btn-hover align-middle font-weight-bold none-decoration"><img src="~/images/none-avatar.png" /></button>
+        </div>
+    </div>
+    <div class="modal fade" id="userModal">
+        <div class="transition-smooth modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white text-center font-weight-bold pt-2 pb-2">
+                    Bảng điều khiển
+                </div>
+                <div class="modal-body text-center justify-content-center none-underline pt-3 pb-3">
+                    <div class="col-12 text-center mb-3">
+                        <img src="/images/none-avatar.png" style="border-radius: 150px; width: 125px; height: 125px;">
+                        <br />
+                        <span id="displayname" class="text-primary">User</span>
+                        <hr />
+                    </div>
+                    <div class="col-12 d-flex text-center mb-2">
+                        <div class="col-6">
+                            <a data-target="#user-setting-modal" data-toggle="modal" data-dismiss="modal" class="text-primary none-decoration mouse-pointer" role="button">
+                                <i class="fa fa-cog" style="font-size: 32px"></i>
+                                <br />
+                                <span>Thiết lập</span>
+                            </a>
+                        </div>
+                        <div class="col-6">
+                            <a asp-controller="Login" asp-action="Logout" class="text-primary none-decoration" role="button">
+                                <i class="fas fa-sign-out-alt" style="font-size: 32px"></i>
+                                <br />
+                                <span>Đăng xuất</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="user-setting-modal">
+        <div class="transition-smooth modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white text-center font-weight-bold pt-2 pb-2">
+                    Thiết lập tài khoản
+                </div>
+                <div class="modal-body">
+                    <form id="user-setting-form">
+                        <div class="form-row mb-2">
+                            <div class="col-sm-5 text-center ">
+                                <img src="/images/none-avatar.png" style="border-radius: 120px; width: 120px; height: 120px;">
+                            </div>
+                            <div class="col-sm-7">
+                                <div class="form-row mb-2">
+                                    <span>Tên đăng nhập:</span>
+                                    <input readonly type="text" id="username-setting" class="form-control form-control-sm" />
+                                </div>
+                                <div class="form-row mb-2">
+                                    <span>Tên hiển thị:</span>
+                                    <input readonly type="text" id="display-name-setting" class="form-control form-control-sm" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row mb-2">
+                            <span>Mật khẩu cũ:</span>
+                            <input type="password" id="old-password-setting" class="form-control form-control-sm" />
+                        </div>
+                        <div class="form-row mb-2">
+                            <span>Mật khẩu:</span>
+                            <input type="password" id="password-setting" class="form-control form-control-sm" />
+                        </div>
+                        <div class="form-row mb-2">
+                            <span>Nhập lại mật khẩu:</span>
+                            <input type="password" id="re-password-setting" class="form-control form-control-sm" />
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer p-2">
+                    <span id="loading-update-form" class="text-primary font-weight-bold"><i style="        font-size: 20px" class="fas fa-circle-notch fa-spin fa-fw"></i> Đang cập nhật</span>
+                    <button class="btn btn-sm btn-danger" id="hide-setting-form" data-dismiss="modal"><i class="fa fa-times"></i> Đóng</button>
+                    <button class="btn btn-sm btn-primary" id="submit-setting-form"><i class="fa fa-key"></i> Cập nhật mật khẩu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

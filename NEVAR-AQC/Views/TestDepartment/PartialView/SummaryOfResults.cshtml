@@ -1,0 +1,77 @@
+﻿@model NEVAR_AQC.Core.Models.ReceptionDepartment.SYSRequirementInvoiceModel
+@{
+    Layout = null;
+    int i = 0;
+}
+@if (Model != null)
+{
+    <table class="table table-hover table-light">
+        <thead>
+            <tr class="bg-primary text-light">
+                <th>STT</th>
+                <th>Đối tượng</th>
+                <th>Mã số mẫu</th>
+                <th>Chỉ tiêu</th>
+                <th>Phương pháp</th>
+                <th>Thời gian</th>
+                <th>Người thực hiện</th>
+                <th>Chức năng</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.IDTestRequirementEntities.Count != 0)
+            {
+                @foreach (var specimen in Model.IDTestRequirementEntities)
+                {
+                    @foreach (var property in specimen.IDTRTestPropertyEntities)
+                    {
+                        <tr>
+                            <td>@(++i)</td>
+                            <td class="specimen-object">@specimen.CTGTestObjectEntity.Name</td>
+                            <td class="specimen-code">@specimen.SpecimenCode</td>
+                            <td class="property-name">@Html.Raw(property.CTGTestPropertyEntity.Name)</td>
+                            <td class="method-name">
+                                @if (property.TestMethodId != null)
+                                {
+                                    @property.CTGTestMethodEntity.Name<sup>@property.CTGTestMethodEntity.SymbolAttached</sup>
+                                }
+                            </td>
+                            <td class="plan-time">
+                                @(property.PlanFromTime == null ? "" : Convert.ToDateTime(property.PlanFromTime).ToString("dd/MM/yyyy"))
+                                - @(property.PlanToTime == null ? "" : Convert.ToDateTime(property.PlanToTime).ToString("dd/MM/yyyy"))
+                            </td>
+                            <td>
+                                @foreach (var implementer in property.IDTRImplementerEntities)
+                                {
+                                    if (implementer.IsAccept == true)
+                                    {
+                                        @implementer.SYSUserEntity.DisplayName
+                                    }
+                                }
+                            </td>
+                            <td class="table-control control-left text-center">
+                                @if (property.IDTRTestProcessOtherMethodEntities.Any() || property.IDTRTestProcessWeightMethodEntities.Any()
+                           || property.IDTRTestProcessVolumeMethodEntities.Any() || property.IDTRTestProcessAASUCVISAESMethodEntities.Any())
+                                {
+                                    <a href="/testprocess/testprocessreport?property_id=@property.Id" target="_blank" data-id="@property.Id" tl-tooltip="Xem báo cáo tiến trình"><i class="fa fa-ballot-check text-success"></i></a>
+                                    <a href="/testprocess/summarytestresultreport?invoice_id=@specimen.RequirementInvoiceId" target="_blank" data-id="@property.Id" tl-tooltip="Xem kết quả"><i class="fa fa-poll-h text-primary"></i></a>
+                                    @if (Model.ProcessStatusId == 4)
+                                    {
+                                        <a onclick="TestDepartment.ajaxRequest.deleteSummaryOfResultItem(this)" data-id="@property.Id" tl-tooltip="Hủy kết quả này"><i class="fa fa-times text-danger"></i></a>
+                                    }
+                                }
+                            </td>
+                        </tr>
+                    }
+
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="8" class="text-center p-2 text-secondary" style="font-size: 16px"><i class="fa fa-exclamation-triangle"></i><br />Không có dữ liệu</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

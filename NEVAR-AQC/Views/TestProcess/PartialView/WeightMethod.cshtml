@@ -1,0 +1,148 @@
+﻿@{
+    Layout = null;
+}
+<div class="form-row mb-2">
+    <div class="col-3">
+        <label class="align-middle font-weight-bold">Khối lượng/thể tích ban đầu:</label>
+    </div>
+    <div class="col-9">
+        <div class="d-inline-block">
+            <span>Lần 1 (L1): </span>
+            <input id="quantum-l1" type="text" class="input-for-form" style="width: 100px;" />
+            <span>g hoặc mL</span>
+        </div>
+        <div class="d-inline-block">
+            <span>; Lần 2 (L2): </span>
+            <input id="quantum-l2" type="text" class="input-for-form" style="width: 100px;" />
+            <span>g hoặc mL</span>
+        </div>
+    </div>
+</div>
+<div class="form-row mb-2">
+    <div class="col-12">
+        <label class="align-middle font-weight-bold">Khối lượng cân (nếu có):</label>
+        <table class="table table-sm table-bordered table-light text-center">
+            <thead>
+                <tr>
+                    <th>Tên mẫu (kí hiệu chén/cốc)</th>
+                    <th>Chén/cốc nung/sấy (g)</th>
+                    <th>Chén/cốc + mẫu nung/sấy (g)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span>L<sub>1</sub>(</span><input id="weight-of-scale-symbol-l1" type="text" class="input-for-form" style="width: 65px" /><span>)</span></td>
+                    <td><input id="weight-of-cup-l1" type="text" class="input-for-form" /></td>
+                    <td><input id="weight-of-cup-and-specimen-l1"  type="text" class="input-for-form" /></td>
+                </tr>
+                <tr>
+                    <td><span>L<sub>2</sub>(</span><input id="weight-of-scale-symbol-l2" type="text" class="input-for-form" style="width: 65px" /><span>)</span></td>
+                    <td><input id="weight-of-cup-l2" type="text" class="input-for-form" /></td>
+                    <td><input id="weight-of-cup-and-specimen-l2" type="text" class="input-for-form" /></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="form-row mb-2">
+    <div class="col-12">
+        <label class="align-middle font-weight-bold">Nồng độ thêm chuẩn (nếu có):</label>
+        <div class="mb-1">
+            <input type="text" class="input-for-form" /><span> đối với </span><input type="text" class="input-for-form" />
+        </div>
+        <table class="table table-sm table-bordered table-light text-center">
+            <thead>
+                <tr>
+                    <th>Tên mẫu (kí hiệu chén/cốc)</th>
+                    <th>Chén/cốc nung/sấy (g)</th>
+                    <th>Chén/cốc + mẫu nung/sấy (g)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span>T<sub>1</sub>(</span><input id="symbol-t1" type="text" class="input-for-form" style="width: 65px" /><span>)</span></td>
+                    <td><input id="weight-of-cup-t1" type="text" class="input-for-form" /></td>
+                    <td><input id="weight-of-cup-and-specimen-t1" type="text" class="input-for-form" /></td>
+                </tr>
+                <tr>
+                    <td><span>T<sub>2</sub>(</span><input id="symbol-t2" type="text" class="input-for-form" style="width: 65px" /><span>)</span></td>
+                    <td><input id="weight-of-cup-t2" type="text" class="input-for-form" /></td>
+                    <td><input id="weight-of-cup-and-specimen-t2" type="text" class="input-for-form" /></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="form-row mb-2">
+    <div class="col-12">
+        <label class="align-middle font-weight-bold">Hệ số pha loãng (nếu có):</label>
+        <table class="table table-sm table-bordered table-light text-center">
+            <thead>
+                <tr>
+                    <th>Tên mẫu (kí hiệu chén/cốc)</th>
+                    <th><span>L<sub>1</sub>(</span><input id="dilution-coefficient-symbol-l1" type="text" class="input-for-form" style="width: 65px" /><span>)</span></th>
+                    <th><span>L<sub>2</sub>(</span><input id="dilution-coefficient-symbol-l2" type="text" class="input-for-form" style="width: 65px" /><span>)</span></th>
+                    <th><span>T<sub>1</sub>(</span><input id="dilution-coefficient-symbol-t1" type="text" class="input-for-form" style="width: 65px" /><span>)</span></th>
+                    <th><span>T<sub>2</sub>(</span><input id="dilution-coefficient-symbol-t2" type="text" class="input-for-form" style="width: 65px" /><span>)</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span>Hệ số pha loãng</span></td>
+                    <td><input id="dilution-coefficient-l1" type="text" class="input-for-form" /></td>
+                    <td><input id="dilution-coefficient-l2" type="text" class="input-for-form" /></td>
+                    <td><input id="dilution-coefficient-t1" type="text" class="input-for-form" /></td>
+                    <td><input id="dilution-coefficient-t2" type="text" class="input-for-form" /></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="form-row mb-2">
+    <div class="col-12">
+        <label class="align-middle font-weight-bold">Công thức tính toán:</label>
+        <textarea id="calculation-formula" class="form-control form-control-sm"></textarea>
+    </div>
+</div>
+<div class="form-row mb-2">
+    <div class="col-12">
+        <label class="align-middle font-weight-bold">Kết quả tính toán:</label>
+        <table class="table table-sm table-bordered table-light text-center">
+            <thead>
+                <tr>
+                    <th>Tên mẫu (kí hiệu chén/cốc)</th>
+                    <th><span>L<sub>1</sub>(</span><input id="result-symbol-l1" type="text" class="input-for-form" style="width: 65px" /><span>)</span></th>
+                    <th><span>L<sub>2</sub>(</span><input id="result-symbol-l2" type="text" class="input-for-form" style="width: 65px" /><span>)</span></th>
+                    <th><span>T<sub>1</sub>(</span><input id="result-symbol-t1" type="text" class="input-for-form" style="width: 65px" /><span>)</span></th>
+                    <th><span>T<sub>2</sub>(</span><input id="result-symbol-t2" type="text" class="input-for-form" style="width: 65px" /><span>)</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span>Kết quả</span></td>
+                    <td><input id="result-l1" type="text" class="input-for-form" /></td>
+                    <td><input id="result-l2" type="text" class="input-for-form" /></td>
+                    <td><input id="result-t1" type="text" class="input-for-form" /></td>
+                    <td><input id="result-t2" type="text" class="input-for-form" /></td>
+                </tr>
+                <tr>
+                    <td><span>Kết quả trung bình</span></td>
+                    <td colspan="2"><input id="average-results-l" type="text" class="input-for-form" /></td>
+                    <td colspan="2"><input id="average-results-t" type="text" class="input-for-form" /></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="form-row mb-2">
+    <div class="col-12">
+        <label class="align-middle font-weight-bold">Độ thu hồi (nếu có):</label>
+        <textarea id="percent-of-revoke" class="form-control form-control-sm"></textarea>
+    </div>
+</div>
+<div class="form-row mb-2">
+    <div class="col-12">
+        <label class="align-middle font-weight-bold">Kết quả báo cáo:</label>
+        <textarea id="report-results" class="form-control form-control-sm"></textarea>
+    </div>
+</div>

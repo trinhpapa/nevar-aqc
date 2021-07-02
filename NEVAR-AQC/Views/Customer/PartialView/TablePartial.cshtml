@@ -1,0 +1,50 @@
+﻿@{
+    Layout = null;
+    int i = 0;
+}
+@if (Model != null)
+{
+    <div class="table-wrapper">
+        <table id="tableData" class="table table-hover table-light">
+            <thead class="bg-primary text-light">
+                <tr>
+                    <th>Chức năng</th>
+                    <th>STT</th>
+                    <th>Tên khách hàng</th>
+                    <th>Loại khách hàng</th>
+                    <th>Điện thoại</th>
+                    <th>Fax</th>
+                    <th>Email</th>
+                    <th>Địa chỉ</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Results.Count != 0)
+                {
+                    @foreach (var item in Model.Results)
+                    {
+                        <tr data-id="@item.Id">
+                            <td class="table-control text-left">
+                                <a data-id="@item.Id" tr-tooltip="Chỉnh sửa" data-form-mode="update" data-target="#modal-customer-form" data-toggle="modal"><i style="color: #2F87F0" class="fa fa-edit"></i></a>
+                            </td>
+                            <td>@(++i)</td>
+                            <td>@item.Name</td>
+                            <td>@item.CTGCustomerTypeEntity.Name</td>
+                            <td>@item.PhoneNumber</td>
+                            <td>@item.Fax</td>
+                            <td>@item.Email</td>
+                            <td>@item.Address</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="8" class="text-center p-2 text-secondary" style="        font-size: 16px"><i class="fa fa-exclamation-triangle"></i><br />Không có dữ liệu</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <ul id="pagination-tag" data-pages="@Model.PageCount" data-rows="@Model.RowCount" data-index="@Model.CurrentPage" class="pagination justify-content-center"></ul>
+}

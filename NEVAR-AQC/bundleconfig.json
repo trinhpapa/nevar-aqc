@@ -1,0 +1,306 @@
+[
+  {
+    "outputFileName": "wwwroot/css/site.min.css",
+    "inputFiles": [
+      "wwwroot/css/site.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/animation.min.css",
+    "inputFiles": [
+      "wwwroot/css/animation.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/reponsive.min.css",
+    "inputFiles": [
+      "wwwroot/css/reponsive.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/login.min.js",
+    "inputFiles": [
+      "wwwroot/js/login.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/site.min.js",
+    "inputFiles": [
+      "wwwroot/js/site.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/reception-department/receptiondepartment.min.js",
+    "inputFiles": [
+      "wwwroot/js/reception-department/receptiondepartment.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/reception-department/receptiondepartmenthandle.min.js",
+    "inputFiles": [
+      "wwwroot/js/reception-department/receptiondepartmenthandle.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/lib/bootstrap-confirm/bootstrap-confirm.min.js",
+    "inputFiles": [
+      "wwwroot/lib/bootstrap-confirm/bootstrap-confirm.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/home/home.min.js",
+    "inputFiles": [
+      "wwwroot/js/home/home.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/test-department/engineer.min.js",
+    "inputFiles": [
+      "wwwroot/js/test-department/engineer.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/test-department/engineerhandle.min.js",
+    "inputFiles": [
+      "wwwroot/js/test-department/engineerhandle.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/test-department/managerhandle.min.js",
+    "inputFiles": [
+      "wwwroot/js/test-department/managerhandle.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/test-department/manager.min.js",
+    "inputFiles": [
+      "wwwroot/js/test-department/manager.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/management/testobject/testobjectmanagement.min.js",
+    "inputFiles": [
+      "wwwroot/js/management/testobject/testobjectmanagement.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/management/testobject/testobjectmanagementhandle.min.js",
+    "inputFiles": [
+      "wwwroot/js/management/testobject/testobjectmanagementhandle.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/management/field/filedmanagement.min.js",
+    "inputFiles": [
+      "wwwroot/js/management/field/filedmanagement.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/management/field/filedmanagementhandle.min.js",
+    "inputFiles": [
+      "wwwroot/js/management/field/filedmanagementhandle.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/management/testproperty/testpropertymanagement.min.js",
+    "inputFiles": [
+      "wwwroot/js/management/testproperty/testpropertymanagement.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/management/testproperty/testpropertymanagementhandle.min.js",
+    "inputFiles": [
+      "wwwroot/js/management/testproperty/testpropertymanagementhandle.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/management/testmethod/testmethodmanagement.min.js",
+    "inputFiles": [
+      "wwwroot/js/management/testmethod/testmethodmanagement.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/management/testmethod/testmethodmanagementhandle.min.js",
+    "inputFiles": [
+      "wwwroot/js/management/testmethod/testmethodmanagementhandle.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/management/role/rolemanagement.min.js",
+    "inputFiles": [
+      "wwwroot/js/management/role/rolemanagement.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/management/role/rolemanagementhandle.min.js",
+    "inputFiles": [
+      "wwwroot/js/management/role/rolemanagementhandle.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/management/user/usermanagement.min.js",
+    "inputFiles": [
+      "wwwroot/js/management/user/usermanagement.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/management/user/usermanagementhandle.min.js",
+    "inputFiles": [
+      "wwwroot/js/management/user/usermanagementhandle.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/management/customer/customermanagement.min.js",
+    "inputFiles": [
+      "wwwroot/js/management/customer/customermanagement.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/management/customer/customermanagementhandle.min.js",
+    "inputFiles": [
+      "wwwroot/js/management/customer/customermanagementhandle.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/statistic/statistic.min.js",
+    "inputFiles": [
+      "wwwroot/js/statistic/statisitc.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/statistic/statistichandle.min.js",
+    "inputFiles": [
+      "wwwroot/js/statistic/statisitchandle.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  }
+]

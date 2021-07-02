@@ -1,0 +1,35 @@
+﻿@media (max-width: 768px) {
+    #username {
+        display: none !important;
+    }
+
+    .header .logo-area {
+        width: 55px !important;
+    }
+
+        .header .logo-area img {
+            display: none;
+        }
+
+    .header .control-area {
+        width: calc(100% - 55px) !important;
+    }
+
+    .left-control {
+        width: 0px;
+    }
+
+    .main {
+        width: 100%;
+    }
+}
+
+@media (min-width: 768px) {
+    .left-control {
+        width: 235px;
+    }
+
+    .main {
+        width: calc(100% - 235px);
+    }
+}

@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <RootNamespace>NEVAR_AQC.Test</RootNamespace>
+
+    <IsPackable>false</IsPackable>
+
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.1.0" />
+    <PackageReference Include="Moq" Version="4.10.1" />
+    <PackageReference Include="xunit" Version="2.4.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NEVAR-AQC.Business.Logic\NEVAR-AQC.Business.Logic.csproj" />
+    <ProjectReference Include="..\NEVAR-AQC.Data.EF\NEVAR-AQC.Data.EF.csproj" />
+    <ProjectReference Include="..\NEVAR-AQC.Data\NEVAR-AQC.Data.csproj" />
+    <ProjectReference Include="..\NEVAR-AQC.Service.Facade\NEVAR-AQC.Service.Facade.csproj" />
+    <ProjectReference Include="..\NEVAR-AQC.Service\NEVAR-AQC.Service.csproj" />
+  </ItemGroup>
+
+</Project>

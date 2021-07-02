@@ -1,0 +1,65 @@
+﻿@{
+    ViewData["Title"] = "Quản lí quyền người dùng";
+    ViewData["Sitemap"] = "Quản lí quyền người dùng - Quản trị hệ thống";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Scripts {
+    <environment include="Development">
+        <script src="~/js/management/role/rolemanagement.js" asp-append-version="true"></script>
+        <script src="~/js/management/role/rolemanagementhandle.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/management/role/rolemanagement.min.js" asp-append-version="true"></script>
+        <script src="~/js/management/role/rolemanagementhandle.min.js" asp-append-version="true"></script>
+    </environment>
+}
+<div class="main-control bg-white ">
+    <div class="button-function form-inline">
+        <button class="btn btn-sm btn-primary mr-2" data-target="#modal-role-form" data-toggle="modal"><i class="fa fa-plus"></i> Thêm</button>
+        <form id="search-filter-form">
+            <div class="input-group input-group-sm" style="        width: 300px">
+                <input type="text" id="search-filter" name="searchFilter" class="form-control" placeholder="Tên quyền">
+                <div class="input-group-append">
+                    <button tr-tooltip="Tìm kiếm" type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="main-content">
+    <div id="content-data"></div>
+</div>
+<div class="modal fade" id="modal-role-form" data-backdrop="static" data-keyboard="false">
+    <div class="transition-smooth modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white text-center font-weight-bold pt-2 pb-2">
+                Quản lí quyền
+                <a class="text-white float-right mouse-pointer toggle-lg-modal"><i class="far fa-expand-arrows"></i></a>
+            </div>
+            <div class="modal-body">
+                <form id="role-form">
+                    <div class="form-row mb-2">
+                        <span>Tên:</span>
+                        <input type="text" id="role-name" class="form-control form-control-sm" />
+                    </div>
+                    <div class="form-row ">
+                        <span>Chọn chức năng:</span>
+                        <div class="system-function-area">
+                            <ul id="system-function-list"></ul>
+                        </div>
+                    </div>
+                    <div class="form-row mb-2">
+                        <span>Ghi chú:</span>
+                        <textarea type="text" id="role-note" class="form-control form-control-sm" rows="3"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer p-2">
+                <span id="loading-form" class="text-primary font-weight-bold"><i style="        font-size: 20px" class="fas fa-circle-notch fa-spin fa-fw"></i> Đang cập nhật</span>
+                <button class="btn btn-sm btn-danger" id="hide-form" data-dismiss="modal"><i class="fa fa-times"></i> Đóng</button>
+                <button class="btn btn-sm btn-primary" id="submit-form"><i class="fa fa-plus"></i> Thêm</button>
+                <button onclick="updateRole(this)" class="btn btn-sm btn-primary" id="update-form"><i class="fa fa-check"></i> Cập nhật</button>
+            </div>
+        </div>
+    </div>
+</div>

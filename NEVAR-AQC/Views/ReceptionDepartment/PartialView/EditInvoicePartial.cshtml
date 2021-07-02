@@ -1,0 +1,64 @@
+﻿@model NEVAR_AQC.Core.Models.ReceptionDepartment.SYSRequirementInvoiceModel
+@{
+    Layout = null;
+    int specimenOrder = 0;
+}
+
+<div class="form-row mb-2">
+    <div class="col-3">
+        <label>Tên khách hàng:</label>
+    </div>
+    <div class="col-9">
+        <input value="@Model.SYSCustomerEntity.Name" type="text" id="update-test-customer-name" class="customer-name form-control form-control-sm" maxlength="500" />
+    </div>
+</div>
+<div class="form-row mb-2">
+    <div class="col-3">
+        <label>Người đại diện:</label>
+    </div>
+    <div class="col-9">
+        <input value="@Model.Representative" type="text" id="update-representative" class="form-control form-control-sm" maxlength="200" />
+    </div>
+</div>
+<div class="form-row mb-2">
+    <div class="col-3">
+        <label>Địa chỉ:</label>
+    </div>
+    <div class="col-9">
+        <input value="@Model.SYSCustomerEntity.Address" type="text" id="update-customer-address" class="form-control form-control-sm" maxlength="200" />
+    </div>
+</div>
+<div class="form-row mb-2">
+    <div class="col-3">
+        <label>Số phiếu yêu cầu thử nghiệm:</label>
+    </div>
+    <div class="col-9">
+        <input readonly value="@Model.InvoiceNo" type="text" id="update-invoice-no" class="form-control form-control-sm" maxlength="200" />
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr class="bg-primary text-light">
+            <th>STT</th>
+            <th>Mã mẫu</th>
+            <th>Tên mẫu</th>
+            <th>Tên mẫu mới</th>
+            <th>Kí hiệu mẫu</th>
+            <th>Kí hiệu mẫu mới</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var specimen in Model.IDTestRequirementEntities)
+        {
+            <tr class="update-specimen-item" data-code="@specimen.SpecimenCode">
+                <td>@(++specimenOrder)</td>
+                <td><input class="form-control form-control-sm" value="@specimen.SpecimenCode" readonly /></td>
+                <td><input class="form-control form-control-sm" value="@specimen.SpecimenName" readonly /></td>
+                <td><input class="update-specimen-name  form-control form-control-sm" /></td>
+                <td><input class="form-control form-control-sm" value="@specimen.SpecimenSymbol" readonly /></td>
+                <td><input class="update-specimen-symbol form-control form-control-sm" /></td>
+            </tr>
+        }
+    </tbody>
+</table>

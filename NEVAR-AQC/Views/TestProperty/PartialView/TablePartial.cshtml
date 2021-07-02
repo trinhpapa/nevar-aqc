@@ -1,0 +1,56 @@
+﻿@{
+    Layout = null;
+    int i = 0;
+}
+@if (Model != null)
+{
+    <div class="table-wrapper">
+        <table id="tableData" class="table table-hover table-light">
+            <thead class="bg-primary text-light">
+                <tr>
+                    <th>Chức năng</th>
+                    <th>STT</th>
+                    <th>Tên chỉ tiêu</th>
+                    <th>Đơn vị</th>
+                    <th>Đối tượng</th>
+                    <th>Trạng thái</th>
+                    <th>Ghi chú</th>
+                    <th>Ngày thêm</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Results.Count != 0)
+                {
+                    @foreach (var item in Model.Results)
+                    {
+                        <tr>
+                            <td class="table-control control-left">
+                                <a data-form-mode="update" tr-tooltip="Chỉnh sửa" data-target="#modal-handle-form" data-toggle="modal" data-id="@item.Id"><i style="color: #2F87F0" class="fa fa-edit"></i></a>
+                                <a tr-tooltip="Xóa" data-id="@item.Id" onclick="deleteProperty(this)"><i style="color: orangered" class="fa fa-times"></i></a>
+                            </td>
+                            <td>@(++i)</td>
+                            <td>@Html.Raw(item.Name)</td>
+                            <td>@item.Unit</td>
+                            <td>@item.CTGTestObjectEntity.Name</td>
+                            <td>
+                                @if (item.Status)
+                                {<span>Đang hoạt động</span> }
+                                else
+                                { <span>Không</span>}
+                        </td>
+                        <td>@item.Note</td>
+                        <td>@item.CreatedTime</td>
+                    </tr>
+                }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="8" class="text-center p-2 text-secondary" style="        font-size: 16px"><i class="fa fa-exclamation-triangle"></i><br />Không có dữ liệu</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <ul id="pagination-tag" data-pages="@Model.PageCount" data-rows="@Model.RowCount" data-index="@Model.CurrentPage" class="pagination justify-content-center"></ul>
+}

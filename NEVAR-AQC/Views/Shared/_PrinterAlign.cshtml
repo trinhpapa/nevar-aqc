@@ -1,0 +1,36 @@
+﻿
+@{
+    Layout = null;
+}
+<div class="modal fade child-modal" id="modal-print-option" data-backdrop="static" data-keyboard="false">
+    <div class="transition-smooth modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white text-center font-weight-bold pt-2 pb-2">
+                Căn chỉnh phiếu in
+                <a class="text-white float-right mouse-pointer" data-dismiss="modal"><i class="fas fa-times"></i></a>
+            </div>
+            <div class="modal-body pl-4 pr-4">
+                <div class="text-center mb-2 printer-setting-top">
+                    <input type="number" id="topPrintMargin" class="form-control form-control-sm" /><span>cm</span>
+                </div>
+                <div class="form-row">
+                    <div class="col-sm-3 printer-setting-left">
+                        <input type="number" id="leftPrintMargin" class="form-control form-control-sm" /><span>cm</span>
+                    </div>
+                    <div class="col-sm-6 printer-setting-paper">
+                        <div class="printer-setting-content"></div>
+                    </div>
+                    <div class="col-sm-3 printer-setting-right">
+                        <input type="number" id="rightPrintMargin" class="form-control form-control-sm" /><span>cm</span>
+                    </div>
+                </div>
+                <div class="text-center mt-2 printer-setting-bottom">
+                    <input type="number" id="bottomPrintMargin" class="form-control form-control-sm" /><span>cm</span>
+                </div>
+            </div>
+            <div class="modal-footer p-2">
+                <button id="printInvoice" class="btn btn-sm btn-primary"><i class="fa fa-print"></i> In phiếu</button>
+            </div>
+        </div>
+    </div>
+</div>

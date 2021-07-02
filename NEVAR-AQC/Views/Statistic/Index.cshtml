@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Báo cáo thống kê";
+    ViewData["Sitemap"] = "Báo cáo thống kê";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Scripts {
+    <script src="~/lib/Chart.js/Chart.min.js"></script>
+    <environment include="Development">
+        <script src="~/js/statistic/statistic.js" asp-append-version="true"></script>
+        <script src="~/js/statistic/statistichandle.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/statistic/statistic.min.js" asp-append-version="true"></script>
+        <script src="~/js/statistic/statistichandle.min.js" asp-append-version="true"></script>
+    </environment>
+}
+@*<div class="main-control">
+    <div class="button-function bg-white form-inline">
+        <span class="mr-2">Chọn danh mục:</span>
+        <select id="statistic-option" class="form-control form-control-sm">
+            <option value="">Tổng quan</option>
+            <option value="">Thống kê thử nghiệm</option>
+            <option value="">Thống kê hiệu chuẩn</option>
+            <option value="">Thống kê quản lý</option>
+            <option value="">Thống kê hệ thống</option>
+        </select>
+    </div>
+</div>*@
+<p>Chức năng đang nâng cấp</p>

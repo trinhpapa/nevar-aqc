@@ -1,0 +1,126 @@
+﻿@{
+   ViewData["Title"] = "Trang chủ";
+}
+@section Scripts{
+   <environment include="Development">
+      <script src="~/lib/Chart.js/Chart.min.js"></script>
+      <script src="~/lib/countup.js/countUp.js"></script>
+      <script src="~/lib/linqjs/linq.js"></script>
+      <script src="~/js/home/home.js" asp-append-version="true"></script>
+   </environment>
+   <environment exclude="Development">
+      <script src="~/lib/Chart.js/Chart.min.js"></script>
+      <script src="~/lib/countup.js/countUp.min.js"></script>
+      <script src="~/lib/linqjs/linq.min.js"></script>
+      <script src="~/js/home/home.min.js" asp-append-version="true"></script>
+   </environment>
+}
+<section>
+   <div class="card shadow m-4">
+      <div class="row">
+         <div class="col text-center align-items-center">
+            <h5 class="text-center text-primary mt-3">
+               CHI CỤC TIÊU CHUẨN ĐO LƯỜNG CHẤT LƯỢNG NGHỆ AN
+            </h5>
+            <p class="text-center text-primary">
+               Nghe An Department for Standards, Metrology and Quality
+            </p>
+            <h5 class="text-center text-primary">
+               TRUNG TÂM KỸ THUẬT TIÊU CHUẨN ĐO LƯỜNG CHẤT LƯỢNG
+            </h5>
+            <p class="text-center text-primary">
+               Technical Center of Standards, Metrology and Quality
+            </p>
+         </div>
+      </div>
+   </div>
+</section>
+<section>
+   <div class="row m-2">
+      <div class="col-3">
+         <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+               <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                     <span class="text-primary font-weight-bold">Phiếu yêu cầu</span>
+                     <h4 id="invoiceCount" class="mb-0 font-weight-bold"><i class="fas fa-spinner-third fa-spin text-secondary"></i></h4>
+                  </div>
+                  <div class="col-auto">
+                     <i class="fa fa-paste fa-2x text-gray-300"></i>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="col-3">
+         <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+               <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                     <span class="text-success font-weight-bold">Khách hàng</span>
+                     <h4 id="customerCount" class="mb-0 font-weight-bold"><i class="fas fa-spinner-third fa-spin text-secondary"></i></h4>
+                  </div>
+                  <div class="col-auto">
+                     <i class="fa fa-clipboard-user fa-2x text-gray-300"></i>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="col-3">
+         <div class="card border-left-info shadow h-100 py-2">
+            <div class="card-body">
+               <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                     <span class="text-info font-weight-bold">Lĩnh vực</span>
+                     <h4 id="fieldCount" class="mb-0 font-weight-bold"><i class="fas fa-spinner-third fa-spin text-secondary"></i></h4>
+                  </div>
+                  <div class="col-auto">
+                     <i class="fa fa-flask fa-2x text-gray-300"></i>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="col-3">
+         <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card-body">
+               <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                     <span class="text-warning font-weight-bold">Đơn vị</span>
+                     <h4 id="departmentCount" class="mb-0 font-weight-bold"><i class="fas fa-spinner-third fa-spin text-secondary"></i></h4>
+                  </div>
+                  <div class="col-auto">
+                     <i class="fa fa-building fa-2x text-gray-300"></i>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+<section>
+   <div class="row m-2 my-4">
+      <div class="col-8">
+         <div class="card shadow">
+            <div class="card-header">
+               <h6 class="mb-0 text-primary font-weight-bold" id="line-title"></h6>
+            </div>
+            <div class="card-body">
+               <canvas id="myChart"></canvas>
+            </div>
+         </div>
+      </div>
+      <div class="col-4">
+         <div class="card shadow">
+            <div class="card-header">
+               <h6 class="mb-0 text-primary font-weight-bold">Lịch sử đăng nhập</h6>
+            </div>
+            <div class="card-body">
+               <div id="show-login-log"></div>
+               <div class="text-center border-top mt-2"><a href="#">Xem tất cả</a></div>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>

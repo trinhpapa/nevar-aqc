@@ -1,0 +1,63 @@
+﻿@{
+    ViewData["Title"] = "Quản lí đối tượng thử nghiệm";
+    ViewData["Sitemap"] = "Quản lí đối tượng thử nghiệm - Quản trị hệ thống";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Scripts {
+    <environment include="Development">
+        <script src="~/js/management/testobject/testobjectmanagement.js" asp-append-version="true"></script>
+        <script src="~/js/management/testobject/testobjectmanagementhandle.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/management/testobject/testobjectmanagement.min.js" asp-append-version="true"></script>
+        <script src="~/js/management/testobject/testobjectmanagementhandle.min.js" asp-append-version="true"></script>
+    </environment>
+}
+<div class="main-control bg-white ">
+    <div class="button-function form-inline">
+        <button class="btn btn-sm btn-primary mr-2" data-target="#modal-handle-form" data-toggle="modal"><i class="fa fa-plus"></i> Thêm</button>
+        <form id="search-filter-form">
+            <div class="input-group input-group-sm" style="        width: 300px">
+                <input type="text" id="search-filter" name="searchFilter" class="form-control" placeholder="Tên đối tượng, tên lĩnh vực">
+                <div class="input-group-append">
+                    <button t-tooltip="Tìm kiếm" type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="main-content">
+    <div id="content-data"></div>
+</div>
+<div class="modal fade" id="modal-handle-form" data-backdrop="static" data-keyboard="false">
+    <div class="transition-smooth modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white text-center font-weight-bold pt-2 pb-2">
+                Quản lí đối tượng
+                <a class="text-white float-right mouse-pointer toggle-lg-modal"><i class="far fa-expand-arrows"></i></a>
+            </div>
+            <div class="modal-body">
+                <form id="data-form">
+                    <div class="form-row mb-2">
+                        <span>Tên đối tượng:</span>
+                        <input type="text" id="object-name" class="form-control form-control-sm" />
+                    </div>
+                    <div class="form-row mb-2">
+                        <span>Thuộc lĩnh vực:</span>
+                        <select id="object-field" class="form-control form-control-sm" asp-items="@ViewData["CTGField"] as SelectList"></select>
+                    </div>
+                    <div class="form-row mb-2">
+                        <span>Ghi chú:</span>
+                        <textarea type="text" id="object-note" class="form-control form-control-sm" rows="3"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer p-2">
+                <span id="loading-form" class="text-primary font-weight-bold"><i style="        font-size: 20px" class="fas fa-circle-notch fa-spin fa-fw"></i> Đang cập nhật</span>
+                <button class="btn btn-sm btn-danger" id="hide-form" data-dismiss="modal"><i class="fa fa-times"></i> Đóng</button>
+                <button class="btn btn-sm btn-primary" id="submit-form"><i class="fa fa-plus"></i> Thêm</button>
+                <button onclick="updateObject(this)" class="btn btn-sm btn-primary" id="update-form"><i class="fa fa-check"></i> Cập nhật</button>
+            </div>
+        </div>
+    </div>
+</div>

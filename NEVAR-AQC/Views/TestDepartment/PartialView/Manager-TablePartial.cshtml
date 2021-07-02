@@ -1,0 +1,59 @@
+﻿@{
+    Layout = null;
+}
+@if (Model != null)
+{
+    <div class="table-wrapper">
+        <table id="tableData" class="table table-hover table-light">
+            <thead class="bg-primary text-light">
+                <tr>
+                    <th>Chức năng</th>
+                    <th>Số phiếu</th>
+                    <th>Số mẫu</th>
+                    <th>Người tiếp nhận</th>
+                    <th>Ngày tiếp nhận</th>
+                    <th>Ngày hẹn</th>
+                    <th>Trạng thái</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Results.Count != 0)
+                {
+
+                    @foreach (var item in Model.Results)
+                    {
+                        <tr data-id="@item.Id">
+                            <td class="table-control control-left">
+                                @switch (item.ProcessStatusId)
+                                {
+                                    case 1:
+                                        <button data-invoice="@item.InvoiceNo" data-id="@item.Id" data-status="2" class="invoice-status-update btn btn-sm btn-dark btn-block">Tiếp nhận xử lý</button>
+                                        break;
+                                    case 2:
+                                        <button data-plan-mode="update" data-invoice="@item.InvoiceNo" data-id="@item.Id" class="plan-manager btn btn-sm btn-danger btn-block" data-toggle="modal" data-target="#modalPlanManager">Lên kế hoạch</button>
+                                        break;
+                                    default:
+                                        <button data-invoice="@item.InvoiceNo" data-id="@item.Id" class="plan-manager btn btn-sm btn-primary btn-block" data-toggle="modal" data-target="#modal-option-manager">Tùy chọn</button>
+                                        break;
+                                }
+                            </td>
+                            <td>@item.InvoiceNo</td>
+                            <td>@item.IDTestRequirementEntities.Count</td>
+                            <td>@item.CRESYSUserEntity.DisplayName</td>
+                            <td>@item.CreatedTime.ToString("dd/MM/yyyy HH:mm")</td>
+                            <td>@item.ResultDay.ToString("dd/MM/yyyy")</td>
+                            <td><span class="badge" style="color: #fff; background-color: #@item.CTGRequirementStatusEntity.HtmlColour">@item.CTGRequirementStatusEntity.ProcessStatus</span></td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="8" class="text-center p-2 text-secondary" style="font-size: 16px"><i class="fa fa-exclamation-triangle"></i><br />Không có dữ liệu</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <ul id="pagination-tag" data-pages="@Model.PageCount" data-rows="@Model.RowCount" data-index="@Model.CurrentPage" class="pagination justify-content-center"></ul>
+}

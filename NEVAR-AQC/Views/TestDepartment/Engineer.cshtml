@@ -1,0 +1,168 @@
+﻿@{
+    ViewData["Title"] = "Bộ phận thử nghiệm";
+    ViewData["Sitemap"] = "Phòng kỹ thuật - Bộ phận thử nghiệm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/lib/gijgo/css/gijgo.min.css" />
+    <link rel="stylesheet" href="~/lib/jquery-ui/jquery-ui.min.css" />
+    <link rel="stylesheet" href="~/lib/jquery-ui/jquery-ui.theme.min.css" />
+}
+@section Scripts {
+    <script src="~/lib/gijgo/js/gijgo.min.js"></script>
+    <script src="~/lib/jquery-ui/jquery-ui.min.js"></script>
+    <environment exclude="Development">
+        <script src="~/js/test-department/engineer.min.js" asp-append-version="true"></script>
+        <script src="~/js/test-department/engineerhandle.min.js" asp-append-version="true"></script>
+    </environment>
+    <environment include="Development">
+        <script src="~/js/test-department/engineer.js" asp-append-version="true"></script>
+        <script src="~/js/test-department/engineerhandle.js" asp-append-version="true"></script>
+    </environment>
+    <script>
+        $('#datePicker').datepicker({
+            minDate: todayFull,
+            value: todayDateVN,
+            uiLibrary: 'bootstrap4',
+            format: 'dd/mm/yyyy',
+        });
+
+/**/</script>
+}
+<div class="main-control bg-white ">
+    <div class="button-function form-inline">
+        @*<button class="btn btn-sm btn-primary" id="filter-table"><i class="fa fa-filter"></i> Lọc hiển thị</button>*@
+        <span>Tìm kiếm: </span>
+        <form id="search-filter-form">
+            <div class="input-group input-group-sm ml-2" style="width: 300px">
+                <input type="text" id="search-filter" name="searchFilter" class="form-control" placeholder="Chỉ tiêu, mã số mẫu...">
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="filter-content border-top form-inline">
+        <div class="form-inline mr-2">
+            <span>Loại phiếu:&nbsp;</span>
+            <select id="requirement-filter" class="form-control form-control-sm"></select>
+        </div>
+        <div class="form-inline mr-2">
+            <span>Ngày thêm:&nbsp;</span>
+            <input id="created-time-filter" name="ResultDay" class="form-control form-control-sm" required />
+        </div>
+        <div class="form-inline mr-2">
+            <span>Ngày hẹn:&nbsp;</span>
+            <input id="result-day-filter" name="ResultDay" class="form-control form-control-sm" required />
+        </div>
+        <div class="form-inline mr-2">
+            <span>Trạng thái:&nbsp;</span>
+            <select id="status-filter" class="form-control form-control-sm">
+                <option value="0">Tất cả</option>
+                <option value="1">Đã tiếp nhận</option>
+                <option value="2">Đã gửi xử lý</option>
+                <option value="3">Đã lên kế hoạch</option>
+                <option value="4">Đã có kết quả</option>
+                <option value="5">Đã trả kết quả</option>
+            </select>
+        </div>
+        <div class="form-inline mr-2">
+            <button class="btn btn-sm btn-success ml-2" id="filter-table-action"><i class="fa fa-filter"></i> Lọc</button>
+            <button class="btn btn-sm btn-danger ml-2" id="filter-table-cancel"><i class="fa fa-times"></i> Hủy</button>
+        </div>
+    </div>
+</div>
+<div class="main-content">
+    <div id="table-content"></div>
+</div>
+<div class="modal fade" id="modalTestResult" data-backdrop="static" data-keyboard="false">
+    <div class="transition-smooth modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white font-weight-bold pt-2 pb-2">
+                <span>Kết quả thử nghiệm</span>
+                <a class="text-white float-right mouse-pointer toggle-lg-modal"><i class="far fa-expand-arrows"></i></a>
+            </div>
+            <div class="modal-body">
+                <label>Mẫu:</label>
+                <input type="text" id="specimenName" class="form-control form-control-sm" readonly />
+                <label>Chỉ tiêu:</label>
+                <input type="text" id="propertyName" class="form-control form-control-sm" readonly />
+                <label>Phương pháp thử:</label>
+                <input type="text" id="methodName" class="form-control form-control-sm" readonly />
+                <label>Kết quả thử nghiệm:</label>
+                <textarea id="testResult" class="form-control form-control-sm"></textarea>
+            </div>
+            <div class="modal-footer p-2">
+                <span id="loading-form" class="text-primary font-weight-bold"><i style="        font-size: 20px" class="fa fa-circle-o-notch fa-spin fa-fw"></i> Đang cập nhật</span>
+                <button class="btn btn-sm btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Đóng</button>
+                <button onclick="TestDepartment.ajaxRequest.updateTestResultAsync(this)" class="btn btn-sm btn-primary" id="submit-test-result-form"><i class="fa fa-check"></i> Cập nhật</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modalTestProcess" data-backdrop="static" data-keyboard="false">
+    <div class="transition-smooth modal-dialog modal-dialog-centered modal-super">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white font-weight-bold pt-2 pb-2">
+                <span>Báo cáo tiến trình</span>
+                <a class="text-white float-right mouse-pointer toggle-screen-modal"><i class="far fa-expand-arrows"></i></a>
+            </div>
+            <div class="modal-body">
+                <div class="form-row mb-2">
+                    <div class="col-2">
+                        <label class="align-middle font-weight-bold">Đối tượng mẫu:</label>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" class="specimen-object form-control form-control-sm" readonly />
+                    </div>
+                    <div class="col-2">
+                        <label class="align-middle font-weight-bold">Mã số mẫu:</label>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" class="specimen-code form-control form-control-sm" readonly />
+                    </div>
+                </div>
+                <div class="form-row mb-2">
+                    <div class="col-2">
+                        <label class="align-middle font-weight-bold">Tên phép thử:</label>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" class="property-name form-control form-control-sm" readonly />
+                    </div>
+                    <div class="col-2">
+                        <label class="align-middle font-weight-bold">Số hiệu tiêu chuẩn:</label>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" class="method-name form-control form-control-sm" readonly />
+                    </div>
+                </div>
+                <div class="form-row mb-2">
+                    <div class="col-2">
+                        <label class="align-middle font-weight-bold">Kế hoạch:</label>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" class="plan-time form-control form-control-sm" readonly />
+                    </div>
+                    <div class="col-2">
+                        <label class="align-middle font-weight-bold">Loại báo cáo:</label>
+                    </div>
+                    <div class="col-4">
+                        <select id="process-report-type" name="" class="form-control form-control-sm">
+                            <option value="weight">PHƯƠNG PHÁP TRỌNG LƯỢNG</option>
+                            <option value="volume">PHƯƠNG PHÁP THỂ TÍCH</option>
+                            <option value="aas">PHƯƠNG PHÁP AAS, UV-VIS, AES</option>
+                            <option value="other">PHƯƠNG PHÁP KHÁC</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="test-process-content" class="border-top pt-3 mt-3"></div>
+            </div>
+            <div class="modal-footer p-2">
+                <span id="loading-form" class="text-primary font-weight-bold"><i style="        font-size: 20px" class="fa fa-circle-o-notch fa-spin fa-fw"></i> Đang cập nhật</span>
+                <button class="btn btn-sm btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Đóng</button>
+                <button onclick="TestDepartment.ajaxRequest.updateTestProcessAsync(this)" data-submit="false" class="btn btn-sm btn-warning text-white" id="save-test-process-form"><i class="fa fa-circle"></i> Lưu kết quả</button>
+                <button onclick="TestDepartment.ajaxRequest.updateTestProcessAsync(this)" data-submit="true" class="btn btn-sm btn-primary" id="submit-test-process-form"><i class="fa fa-check"></i> Xác nhận kết quả</button>
+            </div>
+        </div>
+    </div>
+</div>

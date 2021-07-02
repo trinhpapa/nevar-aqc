@@ -1,0 +1,50 @@
+﻿@model NEVAR_AQC.Core.Models.ReceptionDepartment.SYSRequirementInvoiceModel
+@{
+    Layout = null;
+}
+<table class="table">
+    <thead class="bg-primary text-light">
+        <tr>
+            <th>Mẫu</th>
+            <th>Chỉ tiêu</th>
+            <th>Phương pháp thử</th>
+            <th>Từ ngày</th>
+            <th>Đến ngày</th>
+            <th>Người thực hiện (*)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var specimen in Model.IDTestRequirementEntities)
+        {
+            @foreach (var property in specimen.IDTRTestPropertyEntities)
+            {
+                <tr data-property="@property.Id">
+                    <td>
+                        <input class="form-control form-control-sm" value="@property.IDTestRequirementEntity.SpecimenCode" readonly />
+                    </td>
+                    <td tr-tooltip="@Html.Raw(property.CTGTestPropertyEntity.Name)">
+                        <input class="form-control form-control-sm" value="@Html.Raw(property.CTGTestPropertyEntity.Name)" readonly />
+                    </td>
+                    <td>
+                        <select disabled="@(property.TestMethodId != null)" data-property="@property.TestPropertyId" class="test-method form-control form-control-sm">
+                            <option value="0">Chọn hoặc để mặc định</option>
+                            @foreach (var itemMethod in property.CTGTestMethodEntities)
+                            {
+                                <option value="@itemMethod.Id" selected="@(itemMethod.Id == property.TestMethodId)">@itemMethod.Name</option>
+                            }
+                        </select>
+                    </td>
+                    <td style="width: 175px">
+                        <input value="@(property.PlanFromTime == null ? "" : Convert.ToDateTime(property.PlanFromTime).ToString("dd/MM/yyyy"))" class="from-date-picker form-control form-control-sm" />
+                    </td>
+                    <td style="width: 175px">
+                        <input value="@(property.PlanFromTime == null ? "" : Convert.ToDateTime(property.PlanToTime).ToString("dd/MM/yyyy"))" class="to-date-picker form-control form-control-sm" />
+                    </td>
+                    <td>
+                        <input value="@string.Join(",", property.IDTRImplementerEntities.Select(w => w.SYSUserEntity.DisplayName))" class="implementer form-control form-control-sm" />
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

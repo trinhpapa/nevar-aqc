@@ -1,0 +1,135 @@
+﻿@{
+    Layout = null;
+}
+<form id="calibration-requirement-form" style="        display: none">
+    <div class="form-row mb-2">
+        <div class="col-sm-2">
+            <label>Khách hàng:</label>
+        </div>
+        <div class="col-sm-10">
+            <input type="text" id="customer" class="customer_name form-control form-control-sm" required />
+        </div>
+    </div>
+    <div class="form-row mb-2">
+        <div class="col-sm-2">
+            <label>Người đại diện:</label>
+        </div>
+        <div class="col-sm-4">
+            <input type="text" class="form-control form-control-sm" required />
+        </div>
+        <div class="col-sm-2 text-right">
+            <label>Điện thoại:</label>
+        </div>
+        <div class="col-sm-4">
+            <input type="text" class="form-control form-control-sm" required />
+        </div>
+    </div>
+    <div class="form-row mb-2">
+        <div class="col-sm-2">
+            <label>Địa chỉ:</label>
+        </div>
+        <div class="col-sm-10">
+            <input type="text" id="customer_address" class="customer_address form-control form-control-sm" />
+        </div>
+    </div>
+    <div class="form-row mb-2">
+        <div class="col-sm-2">
+            <label>Điện thoại:</label>
+        </div>
+        <div class="col-sm-4">
+            <input type="text" id="customer_phone" class="customer_phone form-control form-control-sm" required />
+        </div>
+        <div class="col-sm-2 text-right">
+            <label>Fax:</label>
+        </div>
+        <div class="col-sm-4">
+            <input type="text" id="customer_fax" class="customer_fax form-control form-control-sm" required />
+        </div>
+    </div>
+    <div class="form-row mb-2">
+        <div class="col-sm-2">
+            <label>Thông tin khác:</label>
+        </div>
+        <div class="col-sm-10">
+            <input type="text" id="customer_note" class="form-control form-control-sm" />
+        </div>
+    </div>
+    <div class="mb-2">
+        <label class="">Thông tin / yêu cầu khác của khách:</label>
+        <div class="form-row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-10">
+                <textarea type="text" class="form-control form-control-sm"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="form-row mb-2">
+        <div class="col-sm-2">
+            <label class="">Sử dụng nhà thầu phụ:&nbsp;&nbsp;&nbsp;</label>
+        </div>
+        <div class="col-sm-4">
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="yes" name="customRadioInline1" class="custom-control-input">
+                <label class="custom-control-label" for="yes">Có</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="no" name="customRadioInline1" class="custom-control-input" checked>
+                <label class="custom-control-label" for="no">Không</label>
+            </div>
+        </div>
+        <div class="col-sm-2 text-right">
+            <label class="text-right">Ngày hẹn trả:&nbsp;&nbsp;&nbsp;</label>
+        </div>
+        <div class="col-sm-4">
+            <input id="datePickerCalibration" class="form-control form-control-sm" />
+        </div>
+    </div>
+    <div class="form-row mb-2">
+        <div class="col-sm-2">
+            <label class="">Trả kết quả:&nbsp;&nbsp;&nbsp;</label>
+        </div>
+        <div class="col-sm-10">
+            @foreach (var item in ViewData["ReturnInvoiceResultType"] as IEnumerable<NEVAR_AQC.Core.Models.Managements.CTGReturnInvoiceResultTypeModel>
+               )
+            {
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="Calibration @item.Name" value="@item.Id" name="TestResultType" class="custom-control-input" checked="@(item.Id == 1)">
+                    <label class="custom-control-label" for="Calibration @item.Name">@item.Name</label>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="form-row mb-2">
+        <div class="col-12"><label>Yêu cầu hiệu chuẩn các phương tiện đo sau:</label></div>
+    </div>
+    <div class="form-row mb-2">
+        <div class="col-12">
+            <table class="table table-striped table-borderless">
+                <thead class="bg-primary text-light">
+                    <tr>
+                        <th>Tên phương tiện đo</th>
+                        <th>Số serial number</th>
+                        <th>Đặc trưng kỹ thuật</th>
+                        <th>Số lượng</th>
+                        <th>ĐVT</th>
+                        <th>Tình trạng</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="text" class="form-control form-control-sm" /></td>
+                        <td><input style="        width: 50px" type="text" class="form-control form-control-sm" /></td>
+                        <td><input type="text" class="form-control form-control-sm" /></td>
+                        <td><input type="text" class="form-control form-control-sm" /></td>
+                        <td><input type="text" class="form-control form-control-sm" /></td>
+                        <td><input type="text" class="form-control form-control-sm" /></td>
+                        <td class="table-control">
+                            <i class="fa fa-times text-danger" title="Xóa"></i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</form>

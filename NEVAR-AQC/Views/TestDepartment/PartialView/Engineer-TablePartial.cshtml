@@ -1,0 +1,92 @@
+﻿@model NEVAR_AQC.Core.PagingHelper.PagedResult<NEVAR_AQC.Core.Models.TestDepartment.IDTRImplementerModel>
+@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    Layout = null;
+}
+@if (Model != null)
+{
+    <div class="table-wrapper">
+        <table id="tableData" class="table table-hover table-light">
+            <thead class="bg-primary text-light">
+                <tr>
+                    <th>Chức năng</th>
+                    <th>Đối tượng</th>
+                    <th>Mã số mẫu</th>
+                    <th>Chỉ tiêu</th>
+                    <th>Phương pháp thử</th>
+                    <th>Từ ngày</th>
+                    <th>Đến ngày</th>
+                    <th>Người thực hiện</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Results.Count != 0)
+                {
+
+                    @foreach (var item in Model.Results)
+                    {
+                        <tr>
+                            <td class="table-control control-left">
+                                @{ var processStatus = item.IDTRTestPropertyEntity.IDTestRequirementEntity.SYSRequirementInvoiceEntity.ProcessStatusId;}
+                                @if (processStatus == 3 || processStatus == 4 || processStatus == 5)
+                                {
+                                    if (!item.IDTRTestPropertyEntity.IDTRImplementerEntities.Where(w => w.IsAccept == true).Any())
+                                    {
+                                        <button onclick="ImplementerAcceptClick(this)" data-id="@item.Id" data-invoice="@item.IDTRTestPropertyEntity.IDTestRequirementEntity.SYSRequirementInvoiceEntity.Id" class="accept-plan btn btn-sm btn-danger btn-block">Nhận việc</button>
+                                    }
+                                    if (item.IsAccept == true)
+                                    {
+
+                                        if (!item.IDTRTestPropertyEntity.IDTRTestProcessWeightMethodEntities.Where(w => w.IsSubmitReport == true).Any()
+                                            && !item.IDTRTestPropertyEntity.IDTRTestProcessVolumeMethodEntities.Where(w => w.IsSubmitReport == true).Any()
+                                            && !item.IDTRTestPropertyEntity.IDTRTestProcessOtherMethodEntities.Where(w => w.IsSubmitReport == true).Any()
+                                            && !item.IDTRTestPropertyEntity.IDTRTestProcessAASUCVISAESMethodEntities.Where(w => w.IsSubmitReport == true).Any())
+                                        {
+                                            if (item.IDTRTestPropertyEntity.PlanToTime >= DateTime.Now.Date || @HttpContextAccessor.HttpContext.Session.GetString("username-session") == "nhathauphu")
+                                            {
+                                                <button data-result-mode="update" data-id="@item.Id" data-property="@item.IDTRTestPropertyEntity.Id" data-target="#modalTestProcess" data-toggle="modal" class="btn btn-sm btn-danger btn-block">Nhập báo cáo</button>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <button data-result-mode="view" id="btnViewPlan" data-id="@item.Id" data-property="@item.IDTRTestPropertyEntity.Id" data-target="#modalTestProcess" data-toggle="modal" class="btn btn-success btn-sm btn-block">Xem báo cáo</button>
+                                        }
+
+                                    }
+                                }
+                            </td>
+                            <td class="specimen-object">@item.IDTRTestPropertyEntity.IDTestRequirementEntity.CTGTestObjectEntity.Name</td>
+                            <td class="specimen-code">@item.IDTRTestPropertyEntity.IDTestRequirementEntity.SpecimenCode</td>
+                            <td class="property-name">@Html.Raw(item.IDTRTestPropertyEntity.CTGTestPropertyEntity.Name)</td>
+                            <td class="method-name">
+                                @if (item.IDTRTestPropertyEntity.TestMethodId != null)
+                                {
+                                    @item.IDTRTestPropertyEntity.CTGTestMethodEntity.Name<sup>@item.IDTRTestPropertyEntity.CTGTestMethodEntity.SymbolAttached</sup>
+                                }
+                            </td>
+                            <td class="plan-from-time">@(item.IDTRTestPropertyEntity.PlanFromTime == null ? "" : Convert.ToDateTime(item.IDTRTestPropertyEntity.PlanFromTime).ToString("dd/MM/yyyy"))</td>
+                            <td class="plan-to-time">@(item.IDTRTestPropertyEntity.PlanToTime == null ? "" : Convert.ToDateTime(item.IDTRTestPropertyEntity.PlanToTime).ToString("dd/MM/yyyy"))</td>
+                            <td>
+                                @foreach (var implementer in item.IDTRTestPropertyEntity.IDTRImplementerEntities)
+                                {
+                                    if (implementer.IsAccept == true)
+                                    {
+                                        @implementer.SYSUserEntity.DisplayName
+                                    }
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="8" class="text-center p-2 text-secondary" style="font-size: 16px"><i class="fa fa-exclamation-triangle"></i><br />Không có dữ liệu</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <ul id="pagination-tag" data-pages="@Model.PageCount" data-rows="@Model.RowCount" data-index="@Model.CurrentPage" class="pagination justify-content-center"></ul>
+}

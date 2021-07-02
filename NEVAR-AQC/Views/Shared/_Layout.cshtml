@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - NEVAR Accessment Quality Center</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/toastr/toastr.min.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
+    <link rel="stylesheet" href="~/lib/select2/dist/select2.min.css" />
+    <link rel="stylesheet" href="~/lib/select2/theme/select2-bootstrap-sm.css" />
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/css/animation.min.css" />
+        <link rel="stylesheet" href="~/css/site.min.css" />
+        <link rel="stylesheet" href="~/css/reponsive.min.css" />
+    </environment>
+    <environment include="Development">
+        <link rel="stylesheet" href="~/css/animation.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/css/reponsive.css" />
+    </environment>
+    @RenderSection("Styles", required: false)
+</head>
+<body>
+    <header>
+        <partial name="_Header" />
+    </header>
+    <section class="body">
+        <partial name="_LeftControl" />
+        <main class="main" role="main">
+            @if (ViewData["Sitemap"] != null)
+            {
+                <div class="main-map">
+                    @ViewData["Sitemap"]
+                </div>
+            }
+            @RenderBody()
+        </main>
+    </section>
+
+    <section class="loading-screen text-center">
+        <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>
+    </section>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/aspnet/signalr/dist/browser/signalr.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/lib/bootstrap-confirm/bootstrap-confirm.min.js"></script>
+    <script src="~/lib/toastr/toastr.min.js"></script>
+    <script src="~/lib/select2/dist/select2.min.js"></script>
+    <environment include="Development">
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
